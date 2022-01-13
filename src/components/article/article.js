@@ -106,8 +106,9 @@ const data = [
   </div>
 */
 const articles = document.querySelector('.articles');
+const {title, date, firstParagraph, secondParagraph, thirdParagraph} = data;
 
-  function articleMaker(artObj) {
+  function articleMaker(data) {
     const article = document.createElement('div')
     const articleTitle = document.createElement('h2');
     const articleDate = document.createElement('p');
@@ -115,8 +116,6 @@ const articles = document.querySelector('.articles');
     const secondPgraph = document.createElement('p');
     const thirdPgraph = document.createElement('p');
     const expandButton = document.createElement('span');
-
-    const {title, date, firstParagraph, secondParagraph, thirdParagraph} = data;
 
     article.appendChild(articleTitle);
     article.appendChild(articleDate);
@@ -128,6 +127,13 @@ const articles = document.querySelector('.articles');
     article.classList.add('article');
     expandButton.classList.add('expandButton');
 
+    articleTitle.textContent = data.title;
+    articleDate.textContent = data.date;
+    firstPgraph.textContent = data.firstParagraph;
+    secondPgraph.textContent = data.secondParagraph;
+    thirdPgraph.textContent = data.thirdParagraph;
+    expandButton.textContent = '+';
+
     expandButton.addEventListener('click', evt => {
       article.classList.toggle('article-open')
     })
@@ -136,6 +142,8 @@ const articles = document.querySelector('.articles');
   const articleElems = data.map(articleData => {
     return articleMaker(articleData);
   })
+  console.log(articleElems);
+
   articleElems.forEach(elem => {
     articles.appendChild(elem);
   })
