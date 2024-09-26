@@ -94,6 +94,7 @@ const data = [
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
+  
 
   <div class="article">
     <h2>{title of the article}</h2>
@@ -103,7 +104,50 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+*/
+const articles = document.querySelector('.articles');
+const {title, date, firstParagraph, secondParagraph, thirdParagraph} = data;
 
+  function articleMaker(data) {
+    const article = document.createElement('div')
+    const articleTitle = document.createElement('h2');
+    const articleDate = document.createElement('p');
+    const firstPgraph = document.createElement('p');
+    const secondPgraph = document.createElement('p');
+    const thirdPgraph = document.createElement('p');
+    const expandButton = document.createElement('span');
+
+    article.appendChild(articleTitle);
+    article.appendChild(articleDate);
+    article.appendChild(firstPgraph);
+    article.appendChild(secondPgraph);
+    article.appendChild(thirdPgraph);
+    article.appendChild(expandButton);
+
+    article.classList.add('article');
+    expandButton.classList.add('expandButton');
+
+    articleTitle.textContent = data.title;
+    articleDate.textContent = data.date;
+    firstPgraph.textContent = data.firstParagraph;
+    secondPgraph.textContent = data.secondParagraph;
+    thirdPgraph.textContent = data.thirdParagraph;
+    expandButton.textContent = '+';
+
+    expandButton.addEventListener('click', evt => {
+      article.classList.toggle('article-open')
+    })
+    return article;
+  }
+  const articleElems = data.map(articleData => {
+    return articleMaker(articleData);
+  })
+  console.log(articleElems);
+
+  articleElems.forEach(elem => {
+    articles.appendChild(elem);
+  })
+  /*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
